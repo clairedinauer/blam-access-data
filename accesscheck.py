@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import predCode
 
 #Link to the practice_accesscheck.xlsx Excel sheet
 #This sheet covers the "Access" data entry checklist
@@ -8,37 +9,8 @@ print("This system will indicate if a participant's forms have been entered in A
 df = pd.read_excel('practice_accesscheck.xlsx')
 
 beliefid = str.upper((input('Please enter BeliefID: ')))
-belieflist = [
-'M042311',
-'M042322',
-'M042333',
-'M042344',
-'M042355',
-'M042366',
-'M042377',
-'M042388',
-'M042390',
-'M042401',
-'M042412',
-'M042423',
-'M042434',
-'M042445',
-'M042456',
-'M042467',
-'M042478',
-'M042480',
-'M042491',
-'M042502',
-'M042513',
-'M042524',
-'M042535',
-'M042546',
-'M042557',
-'M042568',
-'M042570'
-]
 
-if beliefid in belieflist:
+if beliefid in predCode.belieflist:
     print ("\nBeliefID found. Here is what I have on file for " + beliefid + ":")
 
     #this selects all rows where the participant id is equal to the user input
