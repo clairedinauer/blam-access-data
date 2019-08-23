@@ -27,3 +27,56 @@ belieflist = [
 'M042568',
 'M042570'
 ]
+
+forms = [
+'Medical History',
+'ConCom Meds',
+'NonPychCC Meds',
+'NUQ',
+'DDF5',
+'SCID5 Summary',
+'MATRICS',
+'Hollow Mask Illusion',
+'BPRS',
+'CHAT',
+'CAINS',
+'LOF',
+'WAMHI'
+]
+
+tofForms =[
+'Consent Form',
+'Doc to Consent',
+'DEMO 1',
+'DEMO 2',
+'Medical History',
+'ConCom Meds',
+'NonPychCC Meds',
+'NUQ',
+'Urine Tox',
+'MRI Safety',
+'DDF5',
+'SCID5',
+'SCID5 Summary',
+'WTAR',
+'MATRICS',
+'Hollow Mask Illusion',
+'PDI + LSHS',
+'Conditioned Hallucinations',
+'Food Task',
+'BPRS',
+'CHAT',
+'CAINS',
+'LOF',
+'WAMHI',
+'MRS',
+'Reversal Learning',
+'ASI',
+'GCB',
+'PANAS',
+'Motion Change',
+'MMN',
+'LTP',
+'Agency Task',
+'NOTES'
+]
