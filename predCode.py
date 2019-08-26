@@ -44,6 +44,7 @@ forms = [
 'WAMHI'
 ]
 
+# table of events forms
 tofForms =[
 'Consent Form',
 'Doc to Consent',

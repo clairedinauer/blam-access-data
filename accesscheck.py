@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import predCode  # predictive coding participant list
+import predCode_access_db # predictive coding access checklist
 
 #Link to the practice_accesscheck.xlsx Excel sheet
 #This sheet covers the "Access" data entry checklist
@@ -19,7 +20,7 @@ if beliefid in predCode.belieflist:
     #this resets the index to regular, so we can just use iloc(0)
     df_temp = df_temp.reset_index()
 
-    for i in predCode.forms:
+    for i in predCode_access_db.forms:
         if df_temp.loc[0, i] == 'no':
             print(i + ' missing')
 
