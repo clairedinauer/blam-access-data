@@ -20,4 +20,4 @@ for beliefid in predCode.belieflist:
 
     for i in predCode_access_db.forms:
         if df_temp.loc[0, i] == 'no':
-            print(i + ' missing')
+            print(i)
