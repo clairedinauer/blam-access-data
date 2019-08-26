@@ -22,7 +22,7 @@ for beliefid in predCode_participant_list.belieflist:
 
     for i in predCode_table_of_events.toeForms:
         if df_temp.loc[0, i] == 'no':
-            print(i)
+            print('   ' + i)
 
     print('NOTES:')
     print(df.loc[df.MPRCID == beliefid, 'NOTES'])
