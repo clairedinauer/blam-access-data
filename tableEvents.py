@@ -1,7 +1,4 @@
 import pandas as pd
-import numpy as np
-from pandas import ExcelWriter
-from pandas import ExcelFile
 import predCode_participant_list  # predictive coding participant list
 import predCode_table_of_events  # predictive coding table of events list
 

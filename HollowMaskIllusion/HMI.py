@@ -1,6 +1,7 @@
 import pandas as pd
-import numpy as np
+from collections import Counter
 
-df = pd.read_excel(r'HMI_simplified.xlsx')
+df_HMI = pd.read_excel('HollowMaskExcel.xlsx', sheet_name='HMI_Simplified')
 
-df.head()
+
+print(dict(Counter(df_HMI.T012)))

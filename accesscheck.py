@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import predCode  # predictive coding participant list
 import predCode_access_db  # predictive coding access checklist
 
