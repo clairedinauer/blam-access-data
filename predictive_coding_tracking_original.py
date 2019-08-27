@@ -6,9 +6,8 @@ from time import sleep as s
 # Link to the practice_accesscheck.xlsx Excel sheet
 # This sheet covers the "Access" data entry checklist
 
-temp = []
-
 df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
+
 
 def select():
     print("Welcome to Predictive Coding Study Particpant Tracking Database.\n")
@@ -63,23 +62,9 @@ def listall():
         print(df.loc[df.MPRCID == beliefid, 'NOTES'])
 
 
-def add():
+def add(a):
     beliefid = str.upper((input('Please enter BeliefID: ')))
-    # if beliefid not in predCode_participant_list.belieflist:
-    #     predCode_participant_list.belieflist.append(beliefid)
-    #     print("Updated List: " + predCode_participant_list.belieflist)
-    # elif beliefid in predCode_participant_list.belieflist:
-    #     print("This BeliefID already exists.")
 
-    # if beliefid not in predCode_participant_list.belieflist:
-    #     predCode_participant_list.belieflist.append(beliefid)
-    # else:
-    #     print("This BeliefID already exists.")
-    with open('list.txt', 'a') as filehandle:
-        # if beliefid not in filehandle:
-                filehandle.writelines(beliefid+",")  # needs to traverse the whole file
-        # else:
-        #     print("This BeliefID already exists.")
 
 if __name__ == "__main__":
     select()
