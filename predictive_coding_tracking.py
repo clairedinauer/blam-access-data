@@ -7,6 +7,10 @@ from time import sleep as s
 # Link to the practice_accesscheck.xlsx Excel sheet
 # This sheet covers the "Access" data entry checklist
 
+'''
+dasjklfjdskajfjsdajfkdsajfdlksajfdsakl;f
+'''
+
 temp = []
 
 df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
@@ -131,6 +135,18 @@ def add():
         filehandle.writelines("'" + beliefid + "'',\n")
         # else:
         #     print("This BeliefID already exists.")
+
+
+def remove():  # This function is not yet working -- must revisit
+    beliefid = str.upper((input('Please enter BeliefID: ')))
+    fin = open('list.txt')
+    fout = open('list_update.txt', "w+")
+    for line in fin:
+        for beliefid in fin:
+            line = line.replace(beliefid, "")
+        fout.write(line)
+    fin.close()
+    fout.close()
 
 
 if __name__ == "__main__":
