@@ -1,6 +1,7 @@
 import pandas as pd
 import predCode_participant_list  # predictive coding participant list
 import predCode_table_of_events  # predictive coding table of events list
+import predCode_access_db
 from time import sleep as s
 
 # Link to the practice_accesscheck.xlsx Excel sheet
@@ -9,6 +10,7 @@ from time import sleep as s
 temp = []
 
 df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
+
 
 def select():
     print("Welcome to Predictive Coding Study Particpant Tracking Database.\n")
@@ -24,6 +26,7 @@ def select():
 
 
 def lookup():
+    global beliefid
     beliefid = str.upper((input('Please enter BeliefID: ')))
     if beliefid in predCode_participant_list.belieflist:
         print("\nBeliefID found. Here is what I have on file for " + beliefid + ":")
@@ -45,6 +48,31 @@ def lookup():
         print("Sorry, I do not have " + beliefid + " on file.")
 
 
+def lookupAccess():
+    s(1)
+    access = str(input("\nWould you also like to see what is missing for " +
+                       beliefid + " in Access? (y/n) "))
+    if access == 'y':
+        df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='ACCESS')
+        if beliefid in predCode_participant_list.belieflist:
+            print("\n" + beliefid + " is missing the following forms in Access:")
+
+            # this selects all rows where the participant id is equal to the user input
+            df_temp = df[df['MPRCID'] == beliefid]
+
+            # this resets the index to regular, so we can just use iloc(0)
+            df_temp = df_temp.reset_index()
+
+            for i in predCode_access_db.forms:
+                if df_temp.loc[0, i] == 'no':
+                    print(i + ' missing')
+        else:
+            print("Sorry, I do not have " + beliefid + " on file.")
+
+    else:
+        exit()
+
+
 def listall():
     for beliefid in predCode_participant_list.belieflist:
         print("\nParticipant " + beliefid + " is missing:")
@@ -63,6 +91,28 @@ def listall():
         print(df.loc[df.MPRCID == beliefid, 'NOTES'])
 
 
+def listallAccess():
+    s(1)
+    access = str(input("\nWould you like to list who is missing which forms in Access? (y/n) "))
+    if access == 'y':
+        df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='ACCESS')
+
+        for beliefid in predCode_participant_list.belieflist:
+            print("\nParticipant " + beliefid + " is missing:")
+
+            # this selects all rows where the participant id is equal to the user input
+            df_temp = df[df['MPRCID'] == beliefid]
+
+            # this resets the index to regular, so we can just use iloc(0)
+            df_temp = df_temp.reset_index()
+
+            for i in predCode_access_db.forms:
+                if df_temp.loc[0, i] == 'no':
+                    print(i)
+        else:
+            exit()
+
+
 def add():
     beliefid = str.upper((input('Please enter BeliefID: ')))
     # if beliefid not in predCode_participant_list.belieflist:
@@ -77,16 +127,20 @@ def add():
     #     print("This BeliefID already exists.")
     with open('list.txt', 'a') as filehandle:
         # if beliefid not in filehandle:
-                filehandle.writelines(beliefid+",")  # needs to traverse the whole file
+        # needs to traverse the whole file
+        filehandle.writelines("'" + beliefid + "'',\n")
         # else:
         #     print("This BeliefID already exists.")
+
 
 if __name__ == "__main__":
     select()
     if selection == 1:
         lookup()
+        lookupAccess()
     elif selection == 2:
         listall()
+        listallAccess()
     elif selection == 3:
         add()
     elif selection == 4:

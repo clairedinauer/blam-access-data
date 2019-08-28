@@ -64,6 +64,8 @@ def listall():
 
 def add(a):
     beliefid = str.upper((input('Please enter BeliefID: ')))
+    with open('list.txt', 'a') as filehandle:
+        filehandle.writelines(beliefid + ",\n")
 
 
 if __name__ == "__main__":
