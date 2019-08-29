@@ -1,3 +1,7 @@
+'''
+This script allows the user to select, view, add, and remove subjects from the Predictive Coding study's participant tracking database
+'''
+
 import pandas as pd
 import predCode_participant_list  # import participant list (subject IDs)
 import predCode_table_of_events  # import table of events list
@@ -7,13 +11,8 @@ from time import sleep as s
 # Link to the practice_accesscheck.xlsx Excel sheet
 # This sheet covers the "Access" data entry checklist
 
-'''
 
-'''
-
-temp = []
-
-df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
+df = pd.read_excel(r'excelData/predCode_table_of_events.xlsx', sheet_name='TABLE OF EVENTS')
 
 
 def select():
@@ -29,7 +28,7 @@ def select():
     s(1)
 
 
-def lookup():
+def lookupTOE():
     global beliefid
     beliefid = str.upper((input('Please enter BeliefID: ')))
     if beliefid in predCode_participant_list.belieflist:
@@ -57,7 +56,7 @@ def lookupAccess():
     access = str(input("\nWould you also like to see what is missing for " +
                        beliefid + " in Access? (y/n) "))
     if access == 'y':
-        df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='ACCESS')
+        df = pd.read_excel(r'excelData/predCode_table_of_events.xlsx', sheet_name='ACCESS')
         if beliefid in predCode_participant_list.belieflist:
             print("\n" + beliefid + " is missing the following forms in Access:")
 
@@ -77,7 +76,7 @@ def lookupAccess():
         exit()
 
 
-def listall():
+def listallTOE():
     for beliefid in predCode_participant_list.belieflist:
         print("\nParticipant " + beliefid + " is missing:")
 
@@ -99,7 +98,7 @@ def listallAccess():
     s(1)
     access = str(input("\nWould you like to list who is missing which forms in Access? (y/n) "))
     if access == 'y':
-        df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='ACCESS')
+        df = pd.read_excel(r'excelData/predCode_table_of_events.xlsx', sheet_name='ACCESS')
 
         for beliefid in predCode_participant_list.belieflist:
             print("\nParticipant " + beliefid + " is missing:")
@@ -152,10 +151,10 @@ def remove():  # This function is not yet working -- must revisit
 if __name__ == "__main__":
     select()
     if selection == 1:
-        lookup()
+        lookupTOE()
         lookupAccess()
     elif selection == 2:
-        listall()
+        listallTOE()
         listallAccess()
     elif selection == 3:
         add()
