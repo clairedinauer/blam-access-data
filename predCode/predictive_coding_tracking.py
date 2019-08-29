@@ -1,19 +1,19 @@
 import pandas as pd
-import predCode_participant_list  # predictive coding participant list
-import predCode_table_of_events  # predictive coding table of events list
-import predCode_access_db
+import predCode_participant_list  # import participant list (subject IDs)
+import predCode_table_of_events  # import table of events list
+import predCode_access_db  # import access database list
 from time import sleep as s
 
 # Link to the practice_accesscheck.xlsx Excel sheet
 # This sheet covers the "Access" data entry checklist
 
 '''
-dasjklfjdskajfjsdajfkdsajfdlksajfdsakl;f
+
 '''
 
 temp = []
 
-df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
+df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='TABLE OF EVENTS')
 
 
 def select():
@@ -57,7 +57,7 @@ def lookupAccess():
     access = str(input("\nWould you also like to see what is missing for " +
                        beliefid + " in Access? (y/n) "))
     if access == 'y':
-        df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='ACCESS')
+        df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='ACCESS')
         if beliefid in predCode_participant_list.belieflist:
             print("\n" + beliefid + " is missing the following forms in Access:")
 
@@ -99,7 +99,7 @@ def listallAccess():
     s(1)
     access = str(input("\nWould you like to list who is missing which forms in Access? (y/n) "))
     if access == 'y':
-        df = pd.read_excel(r'practice_accesscheck.xlsx', sheet_name='ACCESS')
+        df = pd.read_excel(r'excelData/practice_accesscheck.xlsx', sheet_name='ACCESS')
 
         for beliefid in predCode_participant_list.belieflist:
             print("\nParticipant " + beliefid + " is missing:")

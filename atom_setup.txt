@@ -1,0 +1,13 @@
+1. Install Atom via atom.io
+2. Go to "Install a Package" and install the following:
+    a) script
+    b) platformio-ide-terminal
+    c) ide-python (set default to python3)
+    d) file-icons
+    e) linter
+    f) linter-flake8
+        In terminal write: "pip3 install flake8" to avoid error messages
+    g) minimap and minimap-highlight-selected
+    h) python-autopep8
+    g) python-indent
+3. Disable "autocomplete-plus" (because it's annoying)
