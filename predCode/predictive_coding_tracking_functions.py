@@ -133,7 +133,7 @@ def add():  # allows the uer to add a new BeliefID
 
 
 def remove():
-    beliefid = str.upper((input('Please enter BeliefID: '))).strip()
+    beliefid = str.upper((input('Please enter BeliefID: ')))
 
     # This checks if the BeliefID is not in the list:
     with open('list.txt') as f:

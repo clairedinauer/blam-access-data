@@ -143,7 +143,7 @@ def add():  # Function allows the user to add a new BeliefID
 
 
 def remove():  # Function allows the user to remove a listed BeliefID
-    beliefid = str.upper((input('Please enter BeliefID: '))).strip()
+    beliefid = str.upper((input('Please enter BeliefID: ')))
 
     # This checks if the BeliefID is not in the list:
     with open('list.txt') as f:
