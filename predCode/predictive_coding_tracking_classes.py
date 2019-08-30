@@ -1,16 +1,17 @@
 '''
-This script allows the user to select, view, add, and remove subjects from the Predictive Coding study's participant tracking database
+This script allows the user to select, view, add, and remove subjects from the Predictive Coding study's participant tracking database.
+
+The layout is in classes.
 '''
 
 import pandas as pd
 import predCode_participant_list  # import participant list (subject IDs)
 import predCode_table_of_events  # import table of events list
 import predCode_access_db  # import access database list
-from time import sleep as s
+from time import sleep as s  # allows for pauses in display time
 
-# Link to the excelData/predCode_table_of_events.xlsx.xlsx Excel sheet
-# This sheet covers the "Access" data entry checklist
-
+# Link to the predCode_table_of_events.xlsx Excel sheet
+# This sheet covers the "Table of Events" data entry checklist
 df = pd.read_excel(r'excelData/predCode_table_of_events.xlsx', sheet_name='TABLE OF EVENTS')
 
 
@@ -27,6 +28,7 @@ def select():
     s(1)
 
 
+# Class focused on referencing the Table of Events forms. User may either lookup a participant ID or list all IDs for completion of TOE forms.
 class TableOfEvents:
     def __init__(self, input, output):
         self.input = input
@@ -72,6 +74,7 @@ class TableOfEvents:
             print(df.loc[df.MPRCID == beliefid, 'NOTES'])
 
 
+# Class focused on referencing the Access forms. User may either lookup a participant ID or list all IDs for completion of Access forms.
 class AccessDB:
     def __init__(self, input, output):
         self.input = input
@@ -123,7 +126,7 @@ class AccessDB:
                 exit()
 
 
-def add():  # allows the uer to add a new BeliefID
+def add():  # Function allows the user to add a new BeliefID
     beliefid = str.upper((input('Please enter new BeliefID: ')))
 
     # This checks if the BeliefID is already in the list:
@@ -139,7 +142,7 @@ def add():  # allows the uer to add a new BeliefID
         return
 
 
-def remove():
+def remove():  # Function allows the user to remove a listed BeliefID
     beliefid = str.upper((input('Please enter BeliefID: '))).strip()
 
     # This checks if the BeliefID is not in the list:

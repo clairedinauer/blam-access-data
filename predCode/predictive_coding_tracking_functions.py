@@ -1,17 +1,17 @@
 '''
-This script allows the user to select, view, add, and remove subjects from the Predictive Coding study's participant tracking database
+This script allows the user to select, view, add, and remove subjects from the Predictive Coding study's participant tracking database.
+
+The layout is in functions.
 '''
 
 import pandas as pd
 import predCode_participant_list  # import participant list (subject IDs)
 import predCode_table_of_events  # import table of events list
 import predCode_access_db  # import access database list
-from time import sleep as s
+from time import sleep as s  # allows for pauses in display time
 
-# Link to the practice_accesscheck.xlsx Excel sheet
-# This sheet covers the "Access" data entry checklist
-
-
+# Link to the predCode_table_of_events.xlsx Excel sheet
+# This sheet covers the "Table of Events" data entry checklist
 df = pd.read_excel(r'excelData/predCode_table_of_events.xlsx', sheet_name='TABLE OF EVENTS')
 
 
@@ -116,36 +116,41 @@ def listallAccess():
             exit()
 
 
-def add():
-    beliefid = str.upper((input('Please enter BeliefID: ')))
-    # if beliefid not in predCode_participant_list.belieflist:
-    #     predCode_participant_list.belieflist.append(beliefid)
-    #     print("Updated List: " + predCode_participant_list.belieflist)
-    # elif beliefid in predCode_participant_list.belieflist:
-    #     print("This BeliefID already exists.")
+def add():  # allows the uer to add a new BeliefID
+    beliefid = str.upper((input('Please enter new BeliefID: ')))
 
-    # if beliefid not in predCode_participant_list.belieflist:
-    #     predCode_participant_list.belieflist.append(beliefid)
-    # else:
-    #     print("This BeliefID already exists.")
+    # This checks if the BeliefID is already in the list:
+    with open('list.txt') as f:
+        if beliefid in f.read():
+            print("This BeliefID is already taken.")
+            return  # Insert "return" to avoid adding a beliefid that already exists
+
+    # This adds the new beliefid to the text file using append through 'a' and 'writelines':
     with open('list.txt', 'a') as filehandle:
-        # if beliefid not in filehandle:
-        # needs to traverse the whole file
-        filehandle.writelines("'" + beliefid + "'',\n")
-        # else:
-        #     print("This BeliefID already exists.")
+        filehandle.writelines("'" + beliefid + "',\n")
+        print("BeliefID successfully added. Remember to save the 'list.txt' file.")
+        return
 
 
-def remove():  # This function is not yet working -- must revisit
-    beliefid = str.upper((input('Please enter BeliefID: ')))
-    fin = open('list.txt')
-    fout = open('list_update.txt', "w+")
-    for line in fin:
-        for beliefid in fin:
-            line = line.replace(beliefid, "")
-        fout.write(line)
-    fin.close()
-    fout.close()
+def remove():
+    beliefid = str.upper((input('Please enter BeliefID: '))).strip()
+
+    # This checks if the BeliefID is not in the list:
+    with open('list.txt') as f:
+        if beliefid not in f.read():
+            print("This BeliefID is not in the list, and therefore cannot be removed.")
+            return
+
+    # If the BeliefID is in the list, it will be deleted:
+    with open('list.txt', 'r+') as f:
+        t = f.read()
+        beliefid_delete = beliefid.strip()
+        f.seek(0)
+        for line in t.split('\n'):
+            if line != beliefid_delete:
+                f.write(line + '\n')
+        f.truncate()
+        print("BeliefID successfully deleted. Remember to save the 'list.txt' file.")
 
 
 if __name__ == "__main__":

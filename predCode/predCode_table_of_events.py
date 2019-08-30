@@ -1,4 +1,7 @@
-# table of events forms
+'''
+This is a list of the Table of Events forms.
+'''
+
 toeForms = [
     'Consent Form',
     'Doc to Consent',

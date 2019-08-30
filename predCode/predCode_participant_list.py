@@ -1,3 +1,7 @@
+'''
+This is a list of the participant IDs for Predictive Coding.
+'''
+
 belieflist = [
     'M042311',
     'M042322',
