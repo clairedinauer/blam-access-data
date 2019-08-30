@@ -123,22 +123,41 @@ class AccessDB:
                 exit()
 
 
-def add():
-    beliefid = str.upper((input('Please enter BeliefID: ')))
+def add():  # allows the uer to add a new BeliefID
+    beliefid = str.upper((input('Please enter new BeliefID: ')))
+
+    # This checks if the BeliefID is already in the list:
+    with open('list.txt') as f:
+        if beliefid in f.read():
+            print("This BeliefID is already taken.")
+            return  # Insert "return" to avoid adding a beliefid that already exists
+
+    # This adds the new beliefid to the text file using append through 'a' and 'writelines':
     with open('list.txt', 'a') as filehandle:
-        filehandle.writelines("'" + beliefid + "'',\n")
+        filehandle.writelines("'" + beliefid + "',\n")
+        print("BeliefID successfully added. Remember to save the 'list.txt' file.")
+        return
 
 
-# def remove():  # This function is not yet working -- must revisit
-#     beliefid = str.upper((input('Please enter BeliefID: ')))
-#     fin = open('list.txt')
-#     fout = open('list_update.txt', "w+")
-#     for line in fin:
-#         for beliefid in fin:
-#             line = line.replace(beliefid, "")
-#         fout.write(line)
-#     fin.close()
-#     fout.close()
+def remove():
+    beliefid = str.upper((input('Please enter BeliefID: '))).strip()
+
+    # This checks if the BeliefID is not in the list:
+    with open('list.txt') as f:
+        if beliefid not in f.read():
+            print("This BeliefID is not in the list, and therefore cannot be removed.")
+            return
+
+    # If the BeliefID is in the list, it will be deleted:
+    with open('list.txt', 'r+') as f:
+        t = f.read()
+        beliefid_delete = beliefid.strip()
+        f.seek(0)
+        for line in t.split('\n'):
+            if line != beliefid_delete:
+                f.write(line + '\n')
+        f.truncate()
+        print("BeliefID successfully deleted. Remember to save the 'list.txt' file.")
 
 
 # create objects:
@@ -156,8 +175,8 @@ def run():
         ACCESS.listall()
     elif selection == 3:
         add()
-    # elif selection == 4:
-    #     remove()
+    elif selection == 4:
+        remove()
     elif selection == 5:
         print("Until next time, my friend :)")
         s(2)
