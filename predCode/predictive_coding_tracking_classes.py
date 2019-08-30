@@ -137,7 +137,7 @@ def add():  # Function allows the user to add a new BeliefID
 
     # This adds the new beliefid to the text file using append through 'a' and 'writelines':
     with open('list.txt', 'a') as filehandle:
-        filehandle.writelines("'" + beliefid + "',\n")
+        filehandle.writelines(beliefid + "\n")
         print("BeliefID successfully added. Remember to save the 'list.txt' file.")
         return
 
